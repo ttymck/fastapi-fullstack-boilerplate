@@ -13,14 +13,15 @@ Explore the [full docs here](./docs/index.md)
 ## Get Started
 
 1. Copy `.env.example` to `.env` (or create your own)
-2. `docker-compose up -d` to start the database
-3. `pipenv shell`
-4. `FASTAPI_STATICDIGEST_RELOAD=1 uvicorn app.main:create_app --port=8080 --reload`
+2. Change the database configuration/credentials in `.env` and `docker-compose.yaml`
+3. Create a random secret key and put in your env's SECRET_KEY: `openssl rand -hex 32`
+4. Create a new environment and install dependencies: `python -m venv .venv && pipenv install`
+5. Use venv and load .env vars: `pipenv shell`
+6. Start the database: `docker-compose up -d`
+7. Run migrations: `alembic upgrade head`
+8. `FASTAPI_STATICDIGEST_RELOAD=1 uvicorn app.main:create_app --port=8080 --reload`
 
-### Configuration
-
- - Change the database configuration/credentials in `.env` and `docker-compose.yaml`
- - Set `DEBUG_ADMIN=1` to disable the authorization for the admin panel
+PS: Set `DEBUG_ADMIN=1` to disable the authorization for the admin panel
 
 ## Why?
 
@@ -28,11 +29,9 @@ The dependency-injection provided by FastAPI is such a huge improvement over any
 
 But Django is famous for its admin panel, and the ability to rapidly build server side applications. For this, we include Flask-Admin, and centralied Jinja2 templates as a dependency.
 
-
 ## Built On
 
 - FastAPI
 - [fastapi-utils class-based-view](https://fastapi-utils.davidmontague.xyz/user-guide/class-based-views/)
 - [cookiecutter-flask CRUD mixin](https://github.com/cookiecutter-flask/cookiecutter-flask)
 - [Flask-Admin](https://flask-admin.readthedocs.io/en/latest/)
-
